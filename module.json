@@ -4,6 +4,9 @@
     "description": "Alternative Village Atlas based on Teleport Scrolls.",
     "options": {
         "niceName": "Atlas",
+        "settingsVersion": 1,
+        "settingsFile": "config.json",
+        "settingsMigrator": "settings_migrator.js",
         "reloadable": true
     },
     "servers": ["https://raw.githubusercontent.com/hsdn/atlas/master/"],

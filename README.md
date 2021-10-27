@@ -8,6 +8,7 @@ The teleport scrolls should be in your inventory. A scroll is consumed when tele
 
 Toolbox(/8) | Command description
 --- | ---
-**atlas** | Open the Village Atlas GUI (also you can use **Ctrl+Shift+J**).
+**atlas** | Open the Village Atlas GUI (also you can use **Ctrl+Shift+J** by default).
+**atlas hotkey [hotkey]** | Set new hotkey for opening GUI.
 
 ![](https://i.imgur.com/nGOWDyh.png)

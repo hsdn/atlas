@@ -11,7 +11,29 @@ module.exports = function Atlas(mod) {
 	mod.game.initialize("inventory");
 	mod.game.on("enter_character_lobby", async () => applyCitiesNames());
 
-	mod.command.add("atlas", () => ui.open());
+	mod.command.add("atlas", {
+		"hotkey": arg => {
+			if (!arg) {
+				mod.command.message(`Current hotkey: ${mod.settings.hotkey}`);
+			} else {
+				if (arg.toLowerCase() !== mod.settings.hotkey.toLowerCase()) {
+					const hotkey = arg.toLowerCase().split("+").map(w => w[0].toUpperCase() + w.substr(1)).join("+");
+
+					try {
+						globalShortcut.register(hotkey, () => ui.open());
+						globalShortcut.unregister(mod.settings.hotkey);
+
+						mod.settings.hotkey = hotkey;
+					} catch (e) {
+						return mod.command.message(`Invalid hotkey: ${hotkey}`);
+					}
+				}
+
+				mod.command.message(`New hotkey: ${mod.settings.hotkey}`);
+			}
+		},
+		"$none": () => ui.open()
+	});
 
 	mod.hook("S_SPAWN_ME", 3, event => { player = event; });
 	mod.hook("C_PLAYER_LOCATION", 5, event => { player = event; });
@@ -28,7 +50,7 @@ module.exports = function Atlas(mod) {
 
 	ui.post("/getTitle", (request, response) => {
 		applyCitiesNames();
-		response.json({ "title": `${citiesNames.get(1) || "World"} [Ctrl + Shift + J]` });
+		response.json({ "title": `${citiesNames.get(1) || "World"} [${mod.settings.hotkey.replaceAll("+", " + ")}]` });
 	});
 
 	ui.post("/getCities", (request, response) => {
@@ -76,10 +98,10 @@ module.exports = function Atlas(mod) {
 			.forEach(res => citiesNames.set(res.attributes.id, res.attributes.string));
 	}
 
-	globalShortcut.register("Ctrl+Shift+J", () => ui.open());
+	globalShortcut.register(mod.settings.hotkey, () => ui.open());
 
 	this.destructor = () => {
-		globalShortcut.unregister("Ctrl+Shift+J");
+		globalShortcut.unregister(mod.settings.hotkey);
 		mod.command.remove("atlas");
 	};
 };
