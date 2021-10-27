@@ -1,0 +1,17 @@
+{
+    "files": {
+        "README.md": "6a06002bdee61134f3f09ebf92c47ed4cb21d1f188e949e6b1ca7268ec857397",
+        "cities.js": "2b64ff57044777c91a03b0d9ea427008b6a72ec73b335d6d1b0ad210e8e9b914",
+        "index.js": "e9ef40e27f0ccd086c4e4797a4eb2e38109a3dc9075fa5d5ed1ff13a6638186f",
+        "module.json": "6beb2cb3a7460c14efc5d5504818c7c1a7a36783d4cb58b88725f5c09cba32d7",
+        "ui/css/base.css": "8b4f64c051674f7f26ddd61b2730b53dce30c6dbc3c58edf42742172f8f82b8b",
+        "ui/img/map.png": "0b8e1189ddb563b244630e6802735a0a8d0f8d0759208099f8e59cd3f61aff87",
+        "ui/index.html": "3d45c91e51d32da5f4d20db43e6d2f6a306abba1226ab8ca1f17a38442c54c45",
+        "ui/js/jquery-3.2.1.min.js": "87083882cc6015984eb0411a99d3981817f5dc5c90ba24f0940420c5548d82de"
+    },
+    "defs": {
+        "C_PLAYER_LOCATION": 5,
+        "C_USE_ITEM": 3,
+        "S_SPAWN_ME": 3
+    }
+}

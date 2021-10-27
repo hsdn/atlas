@@ -1,0 +1,55 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="./css/base.css">
+		<script src="/_TERAToolbox/browserInit.js"></script>
+		<script src="./js/jquery-3.2.1.min.js"></script>
+		<script>
+			function uiRequest(event, data, callback) {
+				$.post({
+					traditional: true,
+					url: "/" + event,
+					contentType: "application/json",
+					data: JSON.stringify(data),
+					dataType: "json",
+					success: callback
+				});
+			}
+
+			window.addEventListener('error', function (e) {
+				alert('[UI] Error: ' + e.message)
+			});
+
+			window.onload = function () {
+				uiRequest("getTitle", {}, function (response) {
+					_tera_client_proxy_.resize_to(800, 600);
+					_tera_client_proxy_.set_title(response.title);
+				});
+
+				uiRequest("getCities", {}, function (response) {
+					for (city of response.cities) {
+						var name = city.name;
+						var cssStyle = "left: " + (city.left + 10) + "px; top: " + city.top + "px";
+						var cssClass = "link";
+
+						if (city.available > 0) {
+							if (city.available > 0 && city.available <= 5) {
+								cssClass += " red";
+								name += " (" + city.available + ")";
+							}
+							$("<a/>", { "text": name, "data-itemid": city.itemId, "class": cssClass, "style": cssStyle }).appendTo('#map');
+						} else {
+							$("<span/>", { "text": name, "class": cssClass, "style": cssStyle }).appendTo('#map');
+						}
+					}
+
+					$(".link").click(function () {
+						uiRequest("useItem", { "itemId": $(this).data("itemid") }, function () {
+							_tera_client_proxy_.close();
+						});
+					});
+				});
+			}
+		</script>
+	</head>
+	<body id="map"></body>
+</html>

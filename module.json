@@ -1,0 +1,16 @@
+{
+    "name": "atlas",
+    "author": "HSDN",
+    "description": "Alternative Village Atlas based on Teleport Scrolls.",
+    "options": {
+        "niceName": "Atlas",
+        "reloadable": true
+    },
+    "servers": ["https://raw.githubusercontent.com/hsdn/atlas/master/"],
+    "supportUrl": "https://github.com/hsdn/atlas/issues",
+    "dependencies": {
+        "ui": "https://raw.githubusercontent.com/HakuryuuDom/ui/master/module.json"
+    },
+    "disableAutoUpdate": false,
+    "version": "10/27/2021"
+}
